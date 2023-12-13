@@ -1,0 +1,8 @@
+.boton-amarillo {
+  @include boton($amarillo);
+}
+
+.boton-verde {
+  @include boton($amarillo);
+  
+}
