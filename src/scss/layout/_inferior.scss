@@ -19,6 +19,12 @@
   }
 }
 
+.informacion-meta {
+  span {
+    color: $amarillo;
+  }
+}
+
 .texto-entrada {
   line-height: 2.5rem;
   a {
@@ -41,7 +47,5 @@
       background-color: $verde;
     }
   }
-  span {
-    color: $amarillo;
-  }
+  
 }
