@@ -2,14 +2,14 @@ document.addEventListener(`DOMContentLoaded`, function() {
 
   eventListeners();
 
-  darkmode();
+  darkMode();
 });
 
 function darkMode() {
-  const botonDarkMode = document.querySelector('.dark-mode.boton');
+  const botonDarkMode = document.querySelector('.dark-mode-boton');
 
   botonDarkMode.addEventListener('click', function() {
-    document.body.classList.toggle('darkmode');
+    document.body.classList.toggle('dark-mode');
   });
 }
 function eventListeners() {
