@@ -12,6 +12,11 @@
     margin-top: 3rem;
     margin-bottom: 2rem;
     filter: invert(100);
+
+&:hover {
+  cursor: pointer;
+}
+
     @include tablet {
       margin-top: 0;
     }
@@ -31,10 +36,10 @@
 }
 
 .navegacion {
-  
+  height: 0;
   visibility: hidden;
   opacity: 0;
-  transition: visibility .3s ease-in-out, opacity 0.5s linear;
+  transition: visibility .3s ease-in-out, opacity 0.5s linear, height .5s linear;
 
   @include tablet {
     display: flex;
@@ -76,4 +81,5 @@
 .mostrar {
   visibility: visible;
   opacity: 1;
+  height: auto;
 }
