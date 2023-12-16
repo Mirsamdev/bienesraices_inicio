@@ -1,5 +1,5 @@
 <?php
-  include './includes/templates/header.php';
+  include './includes/templates/header.php'
 ?>
 
   <section class="contenedor seccion">
