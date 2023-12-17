@@ -1,14 +1,17 @@
 <?php
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 // Base de datos
 
 require '../../includes/config/database.php';
 $db = conectarDB();
+// Arreglo con mensajes de errores
+$errores = [];
 
+// Ejecutar el codigo despues de que el usuario envia el formulario
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
-  // echo "<pre>";
-  // var_dump($_POST);
-  // echo "</pre>";
+
 
   $titulo = $_POST['titulo'];
   $precio = $_POST['precio'];
@@ -18,11 +21,46 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
   $estacionamiento = $_POST['estacionamiento'];
   $vendedorId = $_POST['vendedor'];
   
+  if(!$titulo) {
+    $errores[] = "Debes ponerle un titulo maestro";
+  }
+  if(!$precio) {
+    $errores[] = "Debes ponerle un precio maestro";
+  }
+ 
+  if( strlen ($descripcion) < 50 ) {
+    $errores[] = "Ponle una descripcion y asegurate de que tenga 50 caracteres como minimo";
+  }
+  if(!$habitaciones) {
+    $errores[] = "Debes ponerle cuantas habitaciones tiene maestro";
+  }
+ 
+  if(!$wc) {
+    $errores[] = "Donde hacen sus necesidades maestro?";
+  }
+ 
+  if(!$estacionamiento) {
+    $errores[] = "El campo de estacionamiento es obligatorio maestro";
+  }
+ 
+  if(!$vendedorId) {
+    $errores[] = "Debes decirnos quien te vendio la propiedad maestro";
+  }
+ 
+ 
 
-  // Insertar en la BD
+  // echo "<pre>";
+  // var_dump($errores);
+  // echo "</pre>";  
+
+  // exit;
+
+  // Revisar que el array de errores este vacio
+  if(empty($errores)) {
+      // Insertar en la BD
   $query = "INSERT INTO propiedades (titulo, precio, descripcion, habitaciones, wc, estacionamiento, vendedorId) VALUES ('$titulo', '$precio', '$descripcion', '$habitaciones', '$wc', '$estacionamiento','$vendedorId');";
 
-//  echo $query;
+  // echo $query;
 
 $resultado = mysqli_query($db, $query);
 
@@ -30,6 +68,9 @@ if($resultado) {
   echo "Insertado Correctamente";
 } 
 }
+  }
+
+
 
 
 require '../../includes/funciones.php';
@@ -41,7 +82,11 @@ incluirTemplate('header');
 
     <a href="/bienesraices_inicio/admin/index.php" class="boton boton-verde">Volver</a>
 
-  <a href=""></a>
+<?php foreach($errores as $error): ?>
+  <div class="alerta error">
+    <?php echo $error; ?>
+  </div>
+  <?php endforeach; ?>
 
   <form class="formulario" method="POST" action="/bienesraices_inicio/admin/propiedades/crear.php">
     <fieldset>
@@ -79,6 +124,7 @@ incluirTemplate('header');
   <legend>Vendedor</legend>
 
   <select name="vendedor">
+    <option value="">>-- Seleccione --<</option>
     <option value="1">Juan</option>
     <option value="2">Karen</option>
   </select>
