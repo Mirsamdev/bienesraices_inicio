@@ -32,7 +32,9 @@ CREATE TABLE IF NOT EXISTS `propiedades` (
   `creado` date DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   CONSTRAINT `FK_propiedades_vendedores` FOREIGN KEY (`id`) REFERENCES `vendedores` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=UTF8MB4_GENERAL_CI;
+
+
 
 -- Volcando datos para la tabla bienesraices.propiedades: ~0 rows (aproximadamente)
 
@@ -52,3 +54,4 @@ CREATE TABLE IF NOT EXISTS `vendedores` (
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
+
