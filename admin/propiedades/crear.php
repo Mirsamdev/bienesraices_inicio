@@ -1,7 +1,7 @@
 <?php
-// ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
+//  ini_set('display_errors', 1);
+//  ini_set('display_startup_errors', 1);
+//  error_reporting(E_ALL);
 // Base de datos
 
 require '../../includes/config/database.php';
@@ -35,11 +35,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
   $creado = date('Y/m/d');
 
 // Asignar files hacia una variable
-$imagen = $_FILES('imagen');
+$imagen = $_FILES['imagen'];
 
-var_dump($imagen['name']);
-
-exit;
 
   
   if(!$titulo) {
@@ -67,19 +64,41 @@ exit;
   if(!$vendedorId) {
     $errores[] = "Elige un vendedor";
   }
- 
- 
 
-  // echo "<pre>";
-  // var_dump($errores);
-  // echo "</pre>";  
+  if(!$imagen['name'] || $imagen['error']) {
+    $errores[] = 'La imagen es Obligatoria';
+  }
 
-  // exit;
+  // Validar por size (100 Kb Maximo)
+ $medida = 1000 * 100;
+
+
+ if($imagen['size'] > $medida) {
+  $errores[] = 'La imagen es muy pesada';
+}
+ 
 
   // Revisar que el array de errores este vacio
   if(empty($errores)) {
+
+    //SUBIDA DE ARCHIVOS//
+    //crear carpeta//
+    $carpetaImagenes = '../../imagenes/';
+
+    if(!is_dir($carpetaImagenes)) {
+      mkdir($carpetaImagenes);
+    }
+
+    // Generar un nombre unico
+    $nombreImagen = md5( uniqid( rand(), true)) . ".jpg";
+
+    // Subir la imagen
+    move_uploaded_file($imagen['tmp_name'], $carpetaImagenes . $nombreImagen );
+   
+
+
       // Insertar en la BD
-  $query = "INSERT INTO propiedades (titulo, precio, descripcion, habitaciones, wc, estacionamiento, creado, vendedorId) VALUES ('$titulo', '$precio', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$creado', '$vendedorId');";
+  $query = "INSERT INTO propiedades (titulo, precio, imagen, descripcion, habitaciones, wc, estacionamiento, creado, vendedorId) VALUES ('$titulo', '$precio', '$nombreImagen', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$creado', '$vendedorId');";
 
   // echo $query;
 
@@ -88,7 +107,7 @@ $resultado = mysqli_query($db, $query);
 if($resultado) {
     // Redireccionar al usuario.
 
-    header('Location: /bienesraices_inicio/admin/index.php');
+    header('Location: /bienesraices_inicio/admin?resultado=1');
   } 
 }
 
