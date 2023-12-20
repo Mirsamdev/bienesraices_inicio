@@ -1,10 +1,14 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-  $id = $_GET['id'];
-  $id = filter_var($id, FILTER_VALIDATE_INT, true);
+
+$id = $_GET['id'];
+$id = filter_var($id, FILTER_VALIDATE_INT, true);
 
   if (!$id) {
-    header('Location: /');
+    header('Location: /bienesraices_inicio/index.php');
   }
   
   // Importar la conexion 
@@ -13,10 +17,18 @@
 
   // Consultar 
   $query = "SELECT * FROM propiedades WHERE id = {$id}";
-  $propiedad = mysqli_fetch_assoc($resultado);
 
   // obtener resultado
   $resultado = mysqli_query($db, $query);
+
+  if(!$resultado->num_rows) {
+    header('Location: /bienesraices_inicio/index.php');
+  }
+
+  $propiedad = mysqli_fetch_assoc($resultado);
+
+  
+  
 
   require 'includes/funciones.php';
   incluirTemplate('header');
@@ -26,7 +38,7 @@
     <h1><?php echo $propiedad['titulo']; ?></h1>
 
    
-      <img loading="lazy" src="/imagenes/<?php echo $propiedad['imagen']; ?>" alt="imagen de la propiedad">
+      <img loading="lazy" src="/bienesraices_inicio/imagenes/<?php echo $propiedad['imagen']; ?>" alt="imagen de la propiedad">
    
 
     <div class="resumen-propiedad">
@@ -52,7 +64,7 @@
     </div>
   </main>
 
-<?php
+  <?php
   mysqli_close($db);
 
   incluirTemplate('footer');
