@@ -2,6 +2,7 @@
   .contenedor-anuncios {
     @include grid(3, 2rem);
   }
+
 }
 
 .anuncio {
@@ -17,6 +18,7 @@
   }
   
 }
+
 .precio {
   color: $verde;
   font-weight: $bold;
@@ -40,3 +42,4 @@
     }
   }
 }
+

@@ -28,12 +28,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $resultado = mysqli_query($db, $query);
     $propiedad = mysqli_fetch_assoc($resultado);
 
+    unlink('../imagenes/' . $propiedad['imagen']);
     // Elimina la propiedad
     $query = "DELETE FROM propiedades WHERE id = {$id}";
     $resultado = mysqli_query($db, $query);
 
     if($resultado) {
-      header('Location: /bienesraices_inicio/admin');
+      header('Location: /bienesraices_inicio/admin?resultado=3');
     }
   }
 }
@@ -48,9 +49,14 @@ incluirTemplate('header');
     <h1>Administrador de Bienes Raices</h1>
   <?php  if( intval($resultado) === 1): ?>
     <p class="alerta exito">Anuncio Creado Correctamente</p>
-    <?php elseif( intval($resultado) === 2 ): ?>
+   <?php elseif( intval($resultado) === 2 ): ?>
       <p class="alerta exito">Anuncio Actualizado Correctamente</p>
-    <?php endif; ?>
+    
+  <?php elseif( intval($resultado) === 3 ): ?>
+      <p class="alerta exito">Anuncio Eliminado Correctamente</p>
+  <?php endif; ?>
+
+
     <a href="/bienesraices_inicio/admin/propiedades/crear.php" class="boton boton-verde">Nueva Propiedad</a>
 
     <table class="propiedades">
