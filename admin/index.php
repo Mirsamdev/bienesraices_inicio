@@ -1,6 +1,12 @@
 <?php
+session_start();
 
-// Importar la conexion
+require '../../includes/funciones.php';
+$auth = $_SESSION['login'];
+
+if(!$auth) {
+  header('Location: /bienesraices_inicio/admin');
+}
 
 require '../includes/config/database.php';
 $db = conectarDB();

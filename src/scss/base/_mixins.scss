@@ -22,7 +22,8 @@
     grid-template-columns: repeat($columnas, 1fr);
 }
 
-@mixin boton($bgColor, $display) {
+@mixin boton($bgColor, $display, $borde) {
+    border-radius: $borde;
     background-color: $bgColor;
     color: $blanco;
     font-weight: $bold;
@@ -31,7 +32,7 @@
     text-align: center;
     margin-top: calc($separacion / 2);
     display: $display;
-    border: none;
+    border: 1rem;
 
     &:hover {
         background-color: darken($bgColor, 5);
