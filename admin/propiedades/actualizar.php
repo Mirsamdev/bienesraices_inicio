@@ -1,11 +1,16 @@
 <?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
   session_start();
   // Importar la conexion
   require '../../includes/funciones.php';
   $auth = $_SESSION['login'];
   
   if(!$auth) {
-    header('Location: /bienesraices_inicio/admin');
+    header('Location: /bienesraices_inicio/admin/index.php');
   }
 
   $id = $_GET['id'];
@@ -125,16 +130,7 @@ if($imagen['name']) {
   $nombreImagen = $propiedad['imagen'];
 }
 
-    
-
-
-
-
-
-    
-   
-
-
+  
       // Insertar en la BD
   $query = " UPDATE propiedades SET titulo = '{$titulo}', precio = {$precio}, imagen = '{$nombreImagen}', descripcion = '{$descripcion}', habitaciones = {$habitaciones}, wc = {$wc}, estacionamiento = {$estacionamiento}, vendedorId = {$vendedorId} WHERE id = {$id} ";
 
@@ -154,10 +150,6 @@ if($resultado) {
 
   }
 
-
-
-
-require '../../includes/funciones.php';
 incluirTemplate('header');
 ?>
 

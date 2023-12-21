@@ -1,7 +1,15 @@
 <?php
-  // ini_set('display_errors', 1);
-  // ini_set('display_startup_errors', 1);
-  // error_reporting(E_ALL);
+  ini_set('display_errors', 1);
+  ini_set('display_startup_errors', 1);
+  error_reporting(E_ALL);
+  session_start();
+  
+  require '../../includes/funciones.php';
+  $auth = $_SESSION['login'];
+  
+  if(!$auth) {
+    header('Location: /bienesraices_inicio/admin');
+  }
 // Base de datos
 
 require '../../includes/config/database.php';
@@ -117,7 +125,7 @@ if($resultado) {
 
 
 
-require '../../includes/funciones.php';
+
 incluirTemplate('header');
 ?>
 

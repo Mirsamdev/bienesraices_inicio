@@ -1,7 +1,10 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 session_start();
 
-require '../../includes/funciones.php';
+require '../includes/funciones.php';
 $auth = $_SESSION['login'];
 
 if(!$auth) {
@@ -47,7 +50,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 // Incluye un template
-require '../includes/funciones.php';
+
 incluirTemplate('header');
 ?>
 
