@@ -1,0 +1,16 @@
+{
+    "name": "mery/bienesraices_inicio",
+    "description": "Creando un proyecto con PDO",
+    "authors": [
+        {
+            "name": "Mirsandev",
+            "email": "xmirandadevx@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\" : "./classes"
+        }
+    }
+}
