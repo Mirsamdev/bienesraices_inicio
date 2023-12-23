@@ -4,15 +4,26 @@
   error_reporting(E_ALL);
   session_start();
   
-  require '../../includes/funciones.php';
+  require '../../includes/app.php';
+
+  use App\Propiedad;
+
+  $propiedad = new Propiedad;
+
+  echo "<pre>";
+  var_dump($propiedad);
+
+  echo "</pre>";
+
+  exit;
+
   $auth = $_SESSION['login'];
   
   if(!$auth) {
-    header('Location: /bienesraices_inicio/admin');
+    header('Location: /admin');
   }
 // Base de datos
 
-require '../../includes/config/database.php';
 $db = conectarDB();
 // Consultar para obtener los vendedores
 $consulta = "SELECT * FROM vendedores";
@@ -115,7 +126,7 @@ $resultado = mysqli_query($db, $query);
 if($resultado) {
     // Redireccionar al usuario.
 
-    header('Location: /bienesraices_inicio/admin?resultado=1');
+    header('Location: /admin?resultado=1');
   } 
 }
 
@@ -132,7 +143,7 @@ incluirTemplate('header');
   <main class="contenedor seccion">
     <h1>Crear</h1>
 
-    <a href="/bienesraices_inicio/admin/index.php" class="boton boton-verde">Volver</a>
+    <a href="admin/index.php" class="boton boton-verde">Volver</a>
 
 <?php foreach($errores as $error): ?>
   <div class="alerta error">
@@ -140,7 +151,7 @@ incluirTemplate('header');
   </div>
   <?php endforeach; ?>
 
-  <form class="formulario" method="POST" action="/bienesraices_inicio/admin/propiedades/crear.php" enctype="multipart/form-data">
+  <form class="formulario" method="POST" action="admin/propiedades/crear.php" enctype="multipart/form-data">
     <fieldset>
       <legend>Inforacion General</legend>
 

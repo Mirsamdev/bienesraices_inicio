@@ -8,6 +8,7 @@ require 'includes/app.php';
 incluirTemplate('header', $inicio = true);
 ?>
 
+
   <main class="contenedor seccion">
     <h1>Mas sobre Nosotros</h1>
 

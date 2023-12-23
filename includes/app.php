@@ -6,5 +6,5 @@
 
   use App\Propiedad;
 
-  $propiedad = new Propiedad;
+
 
