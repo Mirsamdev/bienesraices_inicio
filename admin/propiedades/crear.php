@@ -3,21 +3,13 @@
   ini_set('display_startup_errors', 1);
   error_reporting(E_ALL);
   session_start();
-  
   require '../../includes/app.php';
 
   use App\Propiedad;
 
-  $propiedad = new Propiedad;
 
-  echo "<pre>";
-  var_dump($propiedad);
 
-  echo "</pre>";
-
-  exit;
-
-  $auth = $_SESSION['login'];
+  $auth = estaAuntenticado();
   
   if(!$auth) {
     header('Location: /admin');
@@ -42,6 +34,10 @@ $vendedorId = $_POST[''];
 
 // Ejecutar el codigo despues de que el usuario envia el formulario
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+  $propiedad = new Propiedad($_POST);
+
+  debugear($propiedad);
 
 
   $titulo = mysqli_real_escape_string( $db, $_POST['titulo']);
@@ -126,7 +122,7 @@ $resultado = mysqli_query($db, $query);
 if($resultado) {
     // Redireccionar al usuario.
 
-    header('Location: /admin?resultado=1');
+    header('Location: admin?resultado=1');
   } 
 }
 

@@ -10,14 +10,14 @@ error_reporting(E_ALL);
   $auth = $_SESSION['login'];
   
   if(!$auth) {
-    header('Location: /bienesraices_inicio/admin/index.php');
+    header('Location: admin/index.php');
   }
 
   $id = $_GET['id'];
   $id = filter_var($id, FILTER_VALIDATE_INT);
 
 if(!$id) {
-  header('Location: /bienesraices_inicio/admin/index.php');
+  header('Location: admin/index.php');
 }
 
   // ini_set('display_errors', 1);
@@ -143,7 +143,7 @@ $resultado = mysqli_query($db, $query);
 if($resultado) {
     // Redireccionar al usuario.
 
-    header('Location: /bienesraices_inicio/admin?resultado=2');
+    header('Location: admin?resultado=2');
   } 
 }
 
@@ -156,7 +156,7 @@ incluirTemplate('header');
   <main class="contenedor seccion">
     <h1>Actualizar</h1>
 
-    <a href="/bienesraices_inicio/admin/index.php" class="boton boton-verde">Volver</a>
+    <a href="/admin/index.php" class="boton boton-verde">Volver</a>
 
 <?php foreach($errores as $error): ?>
   <div class="alerta error">
@@ -177,7 +177,7 @@ incluirTemplate('header');
       <label for="imagen">Imagen:</label>
       <input type="file" id="imagen" accept="image/jpeg, image/png" name="imagen">
 
-      <img src="/bienesraices_inicio/imagenes/<?php echo $imagenPropiedad ?>" class="imagen-small">
+      <img src="/imagenes/<?php echo $imagenPropiedad ?>" class="imagen-small">
 
       <label for="descripcion">Descripcion:</label>
       <textarea  id="descripcion" name="descripcion"><?php echo $descripcion; ?></textarea>

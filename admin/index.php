@@ -8,7 +8,7 @@ require '../includes/funciones.php';
 $auth = $_SESSION['login'];
 
 if(!$auth) {
-  header('Location: /bienesraices_inicio/admin');
+  header('Location: admin');
 }
 
 require '../includes/config/database.php';
@@ -43,7 +43,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $resultado = mysqli_query($db, $query);
 
     if($resultado) {
-      header('Location: /bienesraices_inicio/admin?resultado=3');
+      header('Location: admin?resultado=3');
     }
   }
 }
@@ -66,7 +66,7 @@ incluirTemplate('header');
   <?php endif; ?>
 
 
-    <a href="/bienesraices_inicio/admin/propiedades/crear.php" class="boton boton-verde">Nueva Propiedad</a>
+    <a href="../admin/propiedades/crear.php" class="boton boton-verde">Nueva Propiedad</a>
 
     <table class="propiedades">
       <thead>
@@ -83,7 +83,7 @@ incluirTemplate('header');
         <tr>
           <td><?php echo $propiedad['id'] ?></td>
           <td><?php echo $propiedad['titulo'] ?></td>
-          <td><img src="/bienesraices_inicio/imagenes/<?php echo $propiedad['imagen'] ?>" class="imagen-tabla"></td>
+          <td><img src="/imagenes/<?php echo $propiedad['imagen'] ?>" class="imagen-tabla"></td>
           <td>$ <?php echo $propiedad['precio'] ?></td>
           <td>
 
@@ -94,7 +94,7 @@ incluirTemplate('header');
             <input type="submit" class="boton-rojo-block" value="Eliminar">
             </form>
             
-            <a href="/bienesraices_inicio/admin/propiedades/actualizar.php?id=<?php echo $propiedad['id'] ?>" class="boton-amarillo-block">Actualizar</a>
+            <a href="admin/propiedades/actualizar.php?id=<?php echo $propiedad['id'] ?>" class="boton-amarillo-block">Actualizar</a>
           </td>
         </tr>
         <?php endwhile; ?>
