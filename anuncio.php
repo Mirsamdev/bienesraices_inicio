@@ -8,11 +8,11 @@ $id = $_GET['id'];
 $id = filter_var($id, FILTER_VALIDATE_INT, true);
 
   if (!$id) {
-    header('Location: /bienesraices_inicio/index.php');
+    header('Location: index.php');
   }
   
-  // Importar la conexion 
-  require __DIR__ . '/includes/config/database.php';
+  require 'includes/app.php';
+
   $db = conectarDB();
 
   // Consultar 
@@ -22,7 +22,7 @@ $id = filter_var($id, FILTER_VALIDATE_INT, true);
   $resultado = mysqli_query($db, $query);
 
   if(!$resultado->num_rows) {
-    header('Location: /bienesraices_inicio/index.php');
+    header('Location: index.php');
   }
 
   $propiedad = mysqli_fetch_assoc($resultado);
@@ -30,7 +30,7 @@ $id = filter_var($id, FILTER_VALIDATE_INT, true);
   
   
 
-  require 'includes/funciones.php';
+
   incluirTemplate('header');
 ?>
 
@@ -38,7 +38,7 @@ $id = filter_var($id, FILTER_VALIDATE_INT, true);
     <h1><?php echo $propiedad['titulo']; ?></h1>
 
    
-      <img loading="lazy" src="/bienesraices_inicio/imagenes/<?php echo $propiedad['imagen']; ?>" alt="imagen de la propiedad">
+      <img loading="lazy" src="/imagenes/<?php echo $propiedad['imagen']; ?>" alt="imagen de la propiedad">
    
 
     <div class="resumen-propiedad">

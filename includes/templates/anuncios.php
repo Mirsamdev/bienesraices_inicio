@@ -1,7 +1,6 @@
 <?php 
 
 // Importar la conexion 
-require 'includes/config/database.php';
 $db = conectarDB();
 // consultar 
 $query = "SELECT * FROM propiedades LIMIT {$limite}";
@@ -15,7 +14,7 @@ $resultado = mysqli_query($db, $query);
 <div class="anuncio">
         
         
-          <img loading="lazy" src="/bienesraices_inicio/imagenes/<?php echo $propiedad['imagen']; ?>" alt="anuncio">
+          <img loading="lazy" src="/imagenes/<?php echo $propiedad['imagen']; ?>" alt="anuncio">
         
         
         <div class="contenido-anuncio">
@@ -40,7 +39,7 @@ $resultado = mysqli_query($db, $query);
             </li>
           </ul>
 
-          <a href="/bienesraices_inicio/anuncio.php?id=<?php echo $propiedad['id']; ?>" class="boton-amarillo-block">Ver Propiedad</a>
+          <a href="/anuncio.php?id=<?php echo $propiedad['id']; ?>" class="boton-amarillo-block">Ver Propiedad</a>
 
         </div> <!--.contenido-anuncio-->
       </div> <!--.anuncio-->

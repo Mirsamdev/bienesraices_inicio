@@ -1,5 +1,5 @@
 <?php
-require 'includes/funciones.php';
+require 'includes/app.php';
 incluirTemplate('header');
 ?>
   <main class="contenedor seccion contenido-centrado">
@@ -14,7 +14,7 @@ incluirTemplate('header');
         </picture>
       </div>
         <div class="texto-entrada">
-          <a href="entrada.html">
+          <a href="entrada.php">
             <h4>Terraza en el techo de tu Casa</h4>
             <p>Escrito el: <span>13/12/2023</span> por: <span>Admin</span></p>
             <p>Consejos para construir una terraza en el techo de tu casa con los mejores materiales y ahorrando dinero</p>

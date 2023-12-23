@@ -46,14 +46,14 @@ incluirTemplate('header', $inicio = true);
   ?>
       
     <div class="alinear-derecha">
-      <a href="anuncios.html" class="boton-verde">Ver todas</a>
+      <a href="anuncios.php" class="boton-verde">Ver todas</a>
     </div>
   </section>
 
 <section class="imagen-contacto">
   <h2>Encuentra la casa de tus sueños</h2>
   <p>Llena el formulario de contacto y un asesor se pondra en contacto contigo a la brevedad</p>
-  <a href="contacto.html" class="boton-amarillo">Contactanos</a>
+  <a href="contacto.php" class="boton-amarillo">Contactanos</a>
 </section>
 
 <div class="contenedor seccion seccion-inferior">

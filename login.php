@@ -47,7 +47,7 @@ if(empty($errores)) {
       $_SESSION['usuario'] = $usuario['email'];
       $_SESSION['login'] = true;
 
-      header('Location: /bienesraices_inicio/admin/index.php');
+      header('Location: admin/index.php');
 
     } else {
       $errores[] = 'La contraseña es incorrecta';
