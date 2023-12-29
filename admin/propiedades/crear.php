@@ -55,12 +55,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validar
     $errores = $propiedad->validar();
-
+    $CARPETA_IMAGENES = '../../imagenes/';
     if(empty($errores)) {
     // Crear la carpeta para subir imagenes
-    if(!is_dir(CARPETAS_IMAGENES)) {
-      mkdir(CARPETAS_IMAGENES);
-    }
+    if(!is_dir(CARPETA_IMAGENES)) {
+      mkdir(CARPETA_IMAGENES);
+    };
 
     // Guardar la imagen
     $image->save($CARPETA_IMAGENES . $nombreImagen);
@@ -68,7 +68,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Guarda en la BD
    $resultado = $propiedad->guardar();
 
-    $resultado = mysqli_query($db, $query);
+  $resultado = mysqli_query($db, $query);
 
     // Mensaje de exito
     if($resultado) {
