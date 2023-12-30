@@ -9,7 +9,7 @@
 
   
 
-  $auth = estaAuntenticado();
+  $auth = estaAutenticado();
   
   if(!$auth) {
     header('Location: /admin');

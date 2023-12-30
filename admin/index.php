@@ -2,11 +2,11 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-session_start();
 
 require '../includes/app.php';
 estaAutenticado();
 
+use App\Propiedad;
 
 // Implementar un metodo para obtener todas las propiedades
 $propiedades = Propiedad::all();

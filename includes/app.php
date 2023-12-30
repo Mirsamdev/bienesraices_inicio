@@ -4,9 +4,9 @@
   require 'config/database.php';
   require __DIR__ . '/../vendor/autoload.php';
 
-$db = conectarDB();
+  $db = conectarDB();
 
-use App\Propiedad;
+  use App\Propiedad;
 
-Propiedad::setDB($db);
+  Propiedad::setDB($db);
 
