@@ -125,11 +125,14 @@ class Propiedad {
 
   return self::$errores;
    }
-  }
+
 
   // Lista todas las propiedades
   public static function all() {
-    echo "Consultando";
-  };
+    $query = "SELECT * FROM propiedades";
 
+    $resultado = self::$db->query($query);
 
+    $debuguear($resultado);
+  }
+}
