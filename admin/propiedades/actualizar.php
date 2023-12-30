@@ -4,14 +4,10 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-  session_start();
   // Importar la conexion
-  require '../../includes/funciones.php';
-  $auth = $_SESSION['login'];
-  
-  if(!$auth) {
-    header('Location: admin/index.php');
-  }
+  require '../../includes/app.php';
+  estaAutenticado();
+
 
   $id = $_GET['id'];
   $id = filter_var($id, FILTER_VALIDATE_INT);
@@ -23,14 +19,10 @@ if(!$id) {
   // ini_set('display_errors', 1);
   // ini_set('display_startup_errors', 1);
   // error_reporting(E_ALL);
-// Base de datos
 
-require '../../includes/config/database.php';
-$db = conectarDB();
+
 // Obtener los datos de la propiedad
-$consulta = "SELECT * FROM propiedades WHERE id = {$id}";
-$resultado = mysqli_query($db, $consulta);
-$propiedad = mysqli_fetch_assoc($resultado);
+$propiedad = Propiedad::find($id);
 
 
 
