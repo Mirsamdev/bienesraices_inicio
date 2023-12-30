@@ -127,4 +127,9 @@ class Propiedad {
    }
   }
 
+  // Lista todas las propiedades
+  public static function all() {
+    echo "Consultando";
+  };
+
 

@@ -4,23 +4,12 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 session_start();
 
-require '../includes/funciones.php';
-$auth = $_SESSION['login'];
+require '../includes/app.php';
+estaAutenticado();
 
-if(!$auth) {
-  header('Location: admin');
-}
 
-require '../includes/config/database.php';
-$db = conectarDB();
-
-// Escribir el Query
-
-$query = "SELECT * FROM propiedades";
-
-// Consultar la BD
-
-$resultadoConsulta = mysqli_query($db, $query);
+// Implementar un metodo para obtener todas las propiedades
+$propiedades = Propiedad::all();
 
 // Muestra mensaje condicional
 $resultado = $_GET['resultado'] ?? null;
