@@ -18,7 +18,7 @@
 
 $db = conectarDB();
 
-$propiedad = new Propiedad;
+$propiedad = new Propiedad($_POST['propiedad']);
 
 // Consultar para obtener los vendedores
 $consulta = "SELECT * FROM vendedores";
@@ -31,16 +31,13 @@ $errores = Propiedad::getErrores();
 // Ejecutar el codigo despues de que el usuario envia el formulario
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
   $propiedad = new Propiedad($_POST);
-
-    //SUBIDA DE ARCHIVOS//
-   
-
+ //SUBIDA DE ARCHIVOS//
     // Generar un nombre unico
     $nombreImagen = md5( uniqid( rand(), true)) . ".jpg";
 
     //Setear la imagen
-    if($_FILES['imagen']['tmp_name']) {
-      $image = Image::make($_FILES['imagen']['tmp_name'])->fit(800,600);
+    if($_FILES['propiedad']['tmp_name']['imagen']) {
+      $image = Image::make($_FILES['propiedad']['tmp_name']['imagen'])->fit(800,600);
       $propiedad->setImagen($nombreImagen);
     }
     

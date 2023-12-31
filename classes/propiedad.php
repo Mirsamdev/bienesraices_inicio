@@ -39,8 +39,16 @@ class Propiedad {
    $this->creado = date('Y/m/d');
    $this->vendedorId = $args['vendedorId'] ?? 1;
   }
-
   public function guardar() {
+    if(isset($this->id));
+    // actualizar
+    $this->actualizar();
+  } else {
+    // creando un nuevo registro
+    $this->crear();
+  }
+
+  public function crear() {
 
       // Sanitizar los datos
       $atributos = $this->sanitizarAtributos();
@@ -58,6 +66,10 @@ class Propiedad {
          $resultado = self::$db->query($query);
         
          return $resultado;
+       }
+
+       public function actualizar() {
+        debuguear('Actualizando');
        }
 
        // Identificar y unir los atributos de la BD
@@ -80,6 +92,15 @@ class Propiedad {
   }
   // Subida de archivos
   public function setImagen($imagen) {
+    if(isset($this->id) ) {
+      // Verificar si el archivo existe
+      $existeArchivo = file_exists(CARPETA_IMAGENES . $this->imagen);
+      if($existeArchivo) {
+        // Eliminar imagen anterior
+        unlink(CARPETA_IMAGENES . $this->imagen);
+      }
+    }
+
     if($imagen) {
       // Asignar al atributo de la imagen el nombre de la imagen
       $this->imagen = $imagen;
@@ -96,9 +117,9 @@ class Propiedad {
     if(!$this->titulo) {
       self::$errores[] = "Debes ponerle un titulo a la Propiedad";
     }
-  if(!$this->precio) {
-    $this->errores[] = "Debes asignarle un precio a la Propiedad";
-  }
+    if(!$this->precio) {
+      self::$errores[] = "Debes asignarle un precio a la Propiedad";
+    }
  
   if( strlen ($this->descripcion) < 50 ) {
     self::$errores[] = "Asegurate de ponerle una descripcion que contenga minimo 50 caracteres";
@@ -174,7 +195,10 @@ class Propiedad {
   }
 
   public function sincronizar( $args = [] ) {
-    debuguear($args);
+    foreach($args as $key => $value) {
+      if(property_exists($this, $key ) && !is_null($value)) {
+        $this->$key = $value;
+    }
   } 
-
+}
 }
