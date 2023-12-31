@@ -55,24 +55,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   // Revisar que el array de errores este vacio
   if(empty($errores)) {
+   $propiedad->guardar();
+   // Almacenar imagen
+   $image->save(CARPETA_IMAGENES . $nombreImagen);
     
-    $propiedad->guardar();
-
-  // Insertar en la BD
-  $query = " UPDATE propiedades SET titulo = '{$titulo}', precio = {$precio}, imagen = '{$nombreImagen}', descripcion = '{$descripcion}', habitaciones = {$habitaciones}, wc = {$wc}, estacionamiento = {$estacionamiento}, vendedorId = {$vendedorId} WHERE id = {$id} ";
-
-  $resultado = mysqli_query($db, $query);
-
-  if($resultado) {
-  // Redireccionar al usuario.
-
- header('Location: /admin?resultado=2');
-    } 
+   }
   }
-
-
-  }
-
 incluirTemplate('header');
 ?>
 

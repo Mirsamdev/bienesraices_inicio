@@ -40,13 +40,14 @@ class Propiedad {
    $this->vendedorId = $args['vendedorId'] ?? 1;
   }
   public function guardar() {
-    if(isset($this->id));
+    if(isset($this->id)) {
     // actualizar
     $this->actualizar();
   } else {
     // creando un nuevo registro
     $this->crear();
   }
+}
 
   public function crear() {
 
@@ -69,7 +70,24 @@ class Propiedad {
        }
 
        public function actualizar() {
-        debuguear('Actualizando');
+           // Sanitizar los datos
+          $atributos = $this->sanitizarAtributos();
+
+          $valores = [];
+          foreach($atributos as $key => $value) {
+            $valores[] = "{$key}='{$value}'";
+          }
+          $query = "UPDATE propiedades SET ";
+          $query .= join(', ', $valores );
+          $query .= " WHERE id = '" . self::$db->escape_string($this->id) . "' ";
+          $query .= " LIMIT 1";
+
+          $resultado = self::$db->query($query);
+          
+          if($resultado) {
+            // Redireccionar al usuario.
+          header('Location: /admin?resultado=2');
+            } 
        }
 
        // Identificar y unir los atributos de la BD
