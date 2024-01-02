@@ -14,7 +14,7 @@ class Vendedor extends ActiveRecord {
 
   public function __construct($args = []) {
 
-    //Asignamos a titulo un arreglo titulo y en caso que no este titulo va ser string vacío
+    // Asignamos a titulo un arreglo titulo y en caso que no este titulo va ser string vacío
      $this->id = $args['id'] ?? '';
      $this->nombre = $args['nombre'] ?? '';
      $this->apellido = $args['apellido'] ?? '';

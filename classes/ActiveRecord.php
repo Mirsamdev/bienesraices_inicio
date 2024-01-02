@@ -82,7 +82,7 @@ public function crear() {
      // Identificar y unir los atributos de la BD
      public function atributos() {
       $atributos = [];
-      foreach(self::$columnasDB as $columna) {
+      foreach(static::$columnasDB as $columna) {
         if($columna === 'id') continue;
         $atributos[$columna] = $this->$columna;
       }
@@ -152,7 +152,7 @@ public static function find($id) {
 
   public static function consultarSQL($query) {
     // Consultar la base de datos
-    $resultado = self::$db->query($query);
+    $resultado = static::$db->query($query);
     // Iterar los resultados
     $array = [];
     while($registro = $resultado->fetch_assoc()) {

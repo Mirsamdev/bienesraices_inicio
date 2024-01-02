@@ -5,6 +5,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 use App\Propiedad;
+use App\Vendedor;
 use Intervention\Image\ImageManagerStatic as Image;
 
   // Importar la conexion
@@ -19,20 +20,14 @@ if(!$id) {
   header('Location: admin/index.php');
 }
 
-  // ini_set('display_errors', 1);
-  // ini_set('display_startup_errors', 1);
-  // error_reporting(E_ALL);
+  // Obtener los datos de la propiedad
+  $propiedad = Propiedad::find($id);
 
+  // Consulta para obtener todos los vendedores
+  $vendedores = Vendedor::all();
 
-// Obtener los datos de la propiedad
-$propiedad = Propiedad::find($id);
-
-// Consultar para obtener los vendedores
-$consulta = "SELECT * FROM vendedores";
-$resultado = mysqli_query($db, $consulta);
-
-// Arreglo con mensajes de errores
-$errores = Propiedad::getErrores();
+  // Arreglo con mensajes de errores
+  $errores = Propiedad::getErrores();
 
 
 // Ejecutar el codigo despues de que el usuario envia el formulario
@@ -55,10 +50,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   // Revisar que el array de errores este vacio
   if(empty($errores)) {
-   $propiedad->guardar();
+    if($_FILES['propiedad']['tmp_name']['imagen']) {
    // Almacenar imagen
    $image->save(CARPETA_IMAGENES . $nombreImagen);
-    
+  }
+   $propiedad->guardar();
    }
   }
 incluirTemplate('header');

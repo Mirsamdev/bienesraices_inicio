@@ -10,10 +10,10 @@
 
 estaAutenticado();
 
-$propiedad = new Propiedad();
+$propiedad = new Propiedad;
 
   // Consulta para obtener todos los vendedores
-  $vendedores = Vendedor::all();
+$vendedores = Vendedor::all();
 
 // Arreglo con mensajes de errores
 $errores = Propiedad::getErrores();
@@ -22,7 +22,7 @@ $errores = Propiedad::getErrores();
 // Ejecutar el codigo despues de que el usuario envia el formulario
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
   
-      $propiedad = new Propiedad($_POST);
+      $propiedad = new Propiedad($_POST['propiedad']);
       //SUBIDA DE ARCHIVOS//
 
       // Generar un nombre unico
