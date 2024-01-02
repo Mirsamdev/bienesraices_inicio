@@ -5,24 +5,15 @@
   require '../../includes/app.php';
 
   use App\Propiedad;
+  use App\Vendedor;
   use Intervention\Image\ImageManagerStatic as Image;
 
-  
+estaAutenticado();
 
-  $auth = estaAutenticado();
-  
-  if(!$auth) {
-    header('Location: /admin');
-  }
-// Base de datos
+$propiedad = new Propiedad();
 
-$db = conectarDB();
-
-$propiedad = new Propiedad($_POST['propiedad']);
-
-// Consultar para obtener los vendedores
-$consulta = "SELECT * FROM vendedores";
-$resultado = mysqli_query($db, $consulta);
+  // Consulta para obtener todos los vendedores
+  $vendedores = Vendedor::all();
 
 // Arreglo con mensajes de errores
 $errores = Propiedad::getErrores();
@@ -30,16 +21,18 @@ $errores = Propiedad::getErrores();
 
 // Ejecutar el codigo despues de que el usuario envia el formulario
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $propiedad = new Propiedad($_POST);
- //SUBIDA DE ARCHIVOS//
-    // Generar un nombre unico
-    $nombreImagen = md5( uniqid( rand(), true)) . ".jpg";
+  
+      $propiedad = new Propiedad($_POST);
+      //SUBIDA DE ARCHIVOS//
+
+      // Generar un nombre unico
+      $nombreImagen = md5( uniqid( rand(), true)) . ".jpg";
 
     //Setear la imagen
-    if($_FILES['propiedad']['tmp_name']['imagen']) {
+      if($_FILES['propiedad']['tmp_name']['imagen']) {
       $image = Image::make($_FILES['propiedad']['tmp_name']['imagen'])->fit(800,600);
       $propiedad->setImagen($nombreImagen);
-    }
+ }
     
 
 
