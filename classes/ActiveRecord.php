@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App;
 
 class ActiveRecord {
@@ -18,34 +19,37 @@ protected static $errores = [];
 
 
 public function guardar() {
-  if(isset($this->id)) {
+  if(is_null($this->id)) {
   // actualizar
   $this->actualizar();
 } else {
   // creando un nuevo registro
   $this->crear();
 }
+
 }
 
 public function crear() {
 
-    // Sanitizar los datos
-    $atributos = $this->sanitizarAtributos();
+        // Sanitizar los datos
+        $atributos = $this->sanitizarAtributos();
 
-   
-
-    
        // Insertar en la BD
-       $query = " INSERT INTO " . static::$tabla . " (";
-       $query .= join(', ',array_keys($atributos));
-       $query .=" ) VALUES (' ";
+       $query = " INSERT INTO " . static::$tabla . " ( ";
+       $query .= join(', ', array_keys($atributos));
+       $query .= " ) VALUES (' ";
        $query .= join("', '",array_values($atributos));
        $query .= " ') ";
 
        $resultado = self::$db->query($query);
       
-       return $resultado;
+
+       if($resultado) {
+        // Redireccionar al usuario.
+      header('Location: /admin?resultado=1');
+        } 
      }
+     
 
      public function actualizar() {
          // Sanitizar los datos
@@ -64,7 +68,7 @@ public function crear() {
         
         if($resultado) {
           // Redireccionar al usuario.
-        header('Location: /admin?resultado=2');
+        header('Location: /admin?resultado=1');
           } 
      }
 

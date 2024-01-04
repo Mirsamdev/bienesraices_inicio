@@ -43,29 +43,29 @@ public function __construct($args = [])
       self::$errores[] = "Debes asignarle un precio a la Propiedad";
     }
   
-  if( strlen ($this->descripcion) < 50 ) {
-    self::$errores[] = "Asegurate de ponerle una descripcion que contenga minimo 50 caracteres";
-  }
-  if(!$this->habitaciones) {
-    self::$errores[] = "El numero de habitaciones es obligatorio";
-  }
-  
-  if(!$this->wc) {
-    self::$errores[] = "Debes especificar cuantos Baños tiene la Propiedad";
-  }
-  
-  if(!$this->estacionamiento) {
-    self::$errores[] = "El campo de estacionamiento es obligatorio";
-  }
-  
-  if(!$this->vendedorId) {
-    self::$errores[] = "Elige un vendedor";
-  }
-  
-  if(!$this->imagen) {
-   self::$errores[] = 'La imagen es Obligatoria';
-  }
-  
+    if( strlen ($this->descripcion) < 50 ) {
+      self::$errores[] = "Asegurate de ponerle una descripcion que contenga minimo 50 caracteres";
+    }
+    if(!$this->habitaciones) {
+      self::$errores[] = "El numero de habitaciones es obligatorio";
+    }
+    
+    if(!$this->wc) {
+      self::$errores[] = "Debes especificar cuantos Baños tiene la Propiedad";
+    }
+    
+    if(!$this->estacionamiento) {
+      self::$errores[] = "El campo de estacionamiento es obligatorio";
+    }
+    
+    if(!$this->vendedorId) {
+      self::$errores[] = "Elige un vendedor";
+    }
+    
+    if(!$this->imagen) {
+    self::$errores[] = 'La imagen es Obligatoria';
+    }
+    
   return self::$errores;
    }
 }
