@@ -144,6 +144,17 @@ public static function all() {
   return $resultado;
 }
 
+// Obtiene determinado numero de registros
+public static function get($cantidad) {
+  $query = "SELECT * FROM " . static::$tabla . " LIMIT " . $cantidad;
+
+
+
+  $resultado = self::consultarSQL($query);
+
+  return $resultado;
+}
+
 // Busca un registro por su id 
 public static function find($id) {
   $query = "SELECT * FROM propiedades WHERE id = {$id}";
